@@ -107,55 +107,29 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 }
 
 .typing {
+  white-space: pre-wrap;  /* Allows text to wrap to next line */
   border-right: 2px solid #333;
-  white-space: nowrap;
   overflow: hidden;
   display: inline-block;
   animation: typing 16s steps(100) infinite;
 }
 
+/* Mobile-specific styles */
+@media only screen and (max-width: 600px) {
+  .typing {
+    font-size: 16px;
+  }
+}
+
 @keyframes typing {
   from, to { width: 0; }
   50% { width: 100%; }
-}
-
-.underline {
-  text-decoration: underline dotted #333;
-}
-
-.ink-blot {
-  background: url('ink-blot.png') no-repeat center;
-  background-size: contain;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-}
-
-/* Media query for mobile */
-@media (max-width: 768px) {
-  .typing {
-    white-space: normal;
-  }
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">function adjustFontSize() {
-  var elements = document.querySelectorAll('.fit-text');
-  
-  elements.forEach(function(element) {
-    var parentWidth = element.parentElement.offsetWidth;
-    var elementWidth = element.scrollWidth;
-    
-    if (elementWidth > parentWidth) {
-      var currentFontSize = parseFloat(window.getComputedStyle(element, null).getPropertyValue('font-size'));
-      var newFontSize = (parentWidth / elementWidth) * currentFontSize;
-      element.style.fontSize = newFontSize + 'px';
-    }
-  });
-}
-
-function typeText() {
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">function typeText() {
   var elements = document.querySelectorAll('.typing');
   
   elements.forEach(function(element) {
     var text = element.textContent;
+    var container = element.parentElement;
     element.textContent = '';
     
     var i = 0;
@@ -163,6 +137,10 @@ function typeText() {
       if (i < text.length) {
         element.textContent += text.charAt(i);
         i++;
+        
+        // Adjust the container size here
+        container.style.width = element.scrollWidth + 'px';
+        container.style.height = element.scrollHeight + 'px';
       } else {
         clearInterval(typingEffect);
         adjustFontSize();
@@ -170,6 +148,9 @@ function typeText() {
     }, 100);
   });
 }
+
+// Existing rest of the code
+
 
 window.addEventListener('load', typeText);</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is a letter without a subject, title or header.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
