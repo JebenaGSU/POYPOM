@@ -143,25 +143,13 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   from, to { width: 0; }
   50% { width: 100%; }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">function typeText() {
-  // Dynamic Text Resizing
-  if (window.innerWidth <= 600) {
-    document.documentElement.style.setProperty('--dynamic-font-size', '16px');
-  } else {
-    document.documentElement.style.setProperty('--dynamic-font-size', '24px');
-  }
-
   var elements = document.querySelectorAll('.typing');
+  var isMobile = window.innerWidth <= 600;
   
   elements.forEach(function(element) {
     var text = element.textContent;
     var container = element.parentElement;
     element.textContent = '';
-
-    // Dynamic Container Sizing for mobile
-    if (window.innerWidth <= 600) {
-      container.style.maxWidth = '90%';
-      container.style.overflow = 'auto';
-    }
     
     var i = 0;
     var typingEffect = setInterval(function() {
@@ -174,13 +162,35 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
         container.style.height = element.scrollHeight + 'px';
       } else {
         clearInterval(typingEffect);
-        adjustFontSize();
+        if (!isMobile) {
+          // Only untype the text on desktop
+          untypeText(element, container);
+        }
       }
     }, 100);
   });
 }
 
-window.addEventListener('load', typeText);
+// Function to untype the text (for desktop)
+function untypeText(element, container) {
+  var text = element.textContent;
+  var i = text.length;
+
+  var untypingEffect = setInterval(function() {
+    if (i > 0) {
+      element.textContent = text.substring(0, i - 1);
+      i--;
+      
+      // Adjust the container size here
+      container.style.width = element.scrollWidth + 'px';
+      container.style.height = element.scrollHeight + 'px';
+    } else {
+      clearInterval(untypingEffect);
+      typeText();
+    }
+  }, 100);
+}
+
 
 
 // Existing rest of the code
