@@ -108,6 +108,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 
 .typing {
   border-right: 2px solid #333;
+  white-space: nowrap;
   overflow: hidden;
   display: inline-block;
   animation: typing 16s steps(100) infinite;
@@ -130,19 +131,18 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   height: 20px;
 }
 
-
-
-
-
-@media only screen and (max-width: 600px) {
-  .fit-text {
-    font-size: 14px;
+/* Media query for mobile */
+@media (max-width: 768px) {
+  .typing {
+    white-space: normal;
   }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">function adjustFontSize() {
   var elements = document.querySelectorAll('.fit-text');
+  
   elements.forEach(function(element) {
     var parentWidth = element.parentElement.offsetWidth;
     var elementWidth = element.scrollWidth;
+    
     if (elementWidth > parentWidth) {
       var currentFontSize = parseFloat(window.getComputedStyle(element, null).getPropertyValue('font-size'));
       var newFontSize = (parentWidth / elementWidth) * currentFontSize;
@@ -153,9 +153,11 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 
 function typeText() {
   var elements = document.querySelectorAll('.typing');
+  
   elements.forEach(function(element) {
     var text = element.textContent;
     element.textContent = '';
+    
     var i = 0;
     var typingEffect = setInterval(function() {
       if (i < text.length) {
