@@ -99,16 +99,15 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
 	<!-- UUID://3325D511-F487-4091-964C-2FB5E7F3BC49// --><tw-storydata name="Untitled Story" startnode="9" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="3325D511-F487-4091-964C-2FB5E7F3BC49" zoom="0.6" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
-  font-family: "Courier New", monospace; /* Use a typewriter-style font */
-  background: url('paper-texture.jpg'); /* Set a paper background image */
+  font-family: "Courier New", monospace;
+  background: url('paper-texture.jpg');
   background-size: cover;
-  color: #333; /* Subdued text color */
-  line-height: 1.5; /* Adjust line spacing */
+  color: #333;
+  line-height: 1.5;
 }
 
-/* Text animation for the typing effect */
 .typing {
-  border-right: 2px solid #333; /* Simulate a typing cursor */
+  border-right: 2px solid #333;
   white-space: nowrap;
   overflow: hidden;
   display: inline-block;
@@ -120,42 +119,48 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   50% { width: 100%; }
 }
 
-/* Handwritten underline style */
 .underline {
   text-decoration: underline dotted #333;
 }
 
-/* Ink blot or doodle style */
 .ink-blot {
   background: url('ink-blot.png') no-repeat center;
   background-size: contain;
   display: inline-block;
   width: 20px;
   height: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .fit-text {
+    font-size: 14px;
+  }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">function adjustFontSize() {
-  var elements = document.querySelectorAll('.fit-text'); // Select all elements with the class 'fit-text'
+  // Select all elements with the class 'fit-text'
+  const elements = document.querySelectorAll('.fit-text');
   
-  elements.forEach(function(element) {
-    var parentWidth = element.parentElement.offsetWidth; // Get the width of the parent element
-    var elementWidth = element.scrollWidth; // Get the current width of the element
+  elements.forEach((element) => {
+    const parentWidth = element.parentElement.offsetWidth; // Get the width of the parent element
+    const elementWidth = element.scrollWidth; // Get the current width of the element
     
     if (elementWidth > parentWidth) {
-      var currentFontSize = parseFloat(window.getComputedStyle(element, null).getPropertyValue('font-size')); // Get current font size
-      var newFontSize = (parentWidth / elementWidth) * currentFontSize; // Calculate the new font size
-      element.style.fontSize = newFontSize + 'px'; // Apply the new font size
+      const currentFontSize = parseFloat(window.getComputedStyle(element, null).getPropertyValue('font-size')); // Get current font size
+      const newFontSize = (parentWidth / elementWidth) * currentFontSize; // Calculate the new font size
+      element.style.fontSize = `${newFontSize}px`; // Apply the new font size
     }
   });
 }
 
 function typeText() {
-  var elements = document.querySelectorAll('.typing'); // Select all elements with the class 'typing'
+  // Select all elements with the class 'typing'
+  const elements = document.querySelectorAll('.typing');
   
-  elements.forEach(function(element) {
-    var text = element.textContent;
+  elements.forEach((element) => {
+    const text = element.textContent;
     element.textContent = '';
     
-    var i = 0;
-    var typingEffect = setInterval(function() {
+    let i = 0;
+    const typingEffect = setInterval(() => {
       if (i < text.length) {
         element.textContent += text.charAt(i);
         i++;
