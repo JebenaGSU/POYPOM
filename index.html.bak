@@ -101,9 +101,6 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 	<!-- UUID://3325D511-F487-4091-964C-2FB5E7F3BC49// --><tw-storydata name="Parts of You, Parts of Me" startnode="9" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="3325D511-F487-4091-964C-2FB5E7F3BC49" zoom="0.6" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* Set the background color */
 body {
   background-color: #f8f8f8;
-  font-family: 'Georgia', serif;  /* Typography */
-  background-image: url('your-image-url');  /* Background Image */
-  background-size: cover;
 }
 
 /* Set the text color */
@@ -111,9 +108,6 @@ body {
   color: black;
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  line-height: 1.6;  /* Line Spacing */
-  text-align: center;  /* Text Alignment */
-  box-shadow: 0px 4px 16px rgba(0,0,0,0.1);  /* Borders and Shadow */
 }
 
 .passage-in {
@@ -126,7 +120,7 @@ body {
 
 @media only screen and (max-width: 600px) {
   body {
-    font-size: 20px;  /* Mobile-Only Font Size */
+    font-size: 18px;
   }
   button, input[type="button"], input[type="submit"] {
     padding: 15px 20px;
