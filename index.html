@@ -134,14 +134,64 @@ body {
     height: auto;
   }
   /* Additional layout adjustments, padding, and spacing here */
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// StoryScript section
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Your existing StoryScript section
 $(document).on(':passagerender', function(event) {
   var $passage = $(event.content);
   $passage.css('opacity', 0);
   setTimeout(function() {
     $passage.css('opacity', 1);
   }, 0);
-});</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
+});
+
+// Your audio functions
+let audio = new Audio("Audio/Typing/Typing.mp3");  // Initialize the Audio object globally
+
+function playTypingSoundWithRandomStart() {
+  audio.pause();  // Pause any currently playing audio
+  audio.currentTime = 0;  // Reset the audio to the start
+
+  audio.addEventListener("loadedmetadata", function() {
+    audio.currentTime = Math.random() * audio.duration;  // Set to a random time
+    audio.play();  // Play the audio
+  });
+}
+
+function stopTypingSound(fadeOut = false) {
+  if (fadeOut) {
+    let volume = 1.0;
+    let fadeOutInterval = setInterval(function() {
+      volume -= 0.1;
+      audio.volume = volume;
+
+      if (volume <= 0) {
+        clearInterval(fadeOutInterval);
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }, 100);  // Fades out over 1 second
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+}
+
+// Modified typewriter function
+$.fn.typewriter = function(speed) {
+  playTypingSoundWithRandomStart();  // Start typing sound
+
+  this.each(function() {
+    var $ele = $(this), str = $ele.text(), progress = 0;
+    $ele.text('');
+    var timer = setInterval(function() {
+      $ele.text(str.substring(0, progress++) + (progress & 1 ? '_' : ''));
+      if (progress >= str.length + 1) {
+        clearInterval(timer);
+        stopTypingSound(true);  // Stop typing sound with fade-out
+      }
+    }, speed);
+  });
+  return this;
+};</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is a letter without a subject, title or header.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 8s&gt;&gt;&lt;&lt;type 42ms&gt;&gt;[[Read about love and abuse.-&gt;Love and Abuse]]&lt;&lt;/type&gt;&gt;
