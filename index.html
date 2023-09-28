@@ -142,27 +142,39 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 @keyframes typing {
   from, to { width: 0; }
   50% { width: 100%; }
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">function typeText() {
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Function to detect if the user is on a mobile device
+function isMobile() {
+  return window.innerWidth <= 600;
+}
+
+function typeText() {
   var elements = document.querySelectorAll('.typing');
-  var isMobile = window.innerWidth <= 600;
-  
+
   elements.forEach(function(element) {
     var text = element.textContent;
     var container = element.parentElement;
     element.textContent = '';
-    
+
+    if (isMobile()) {
+      container.style.whiteSpace = 'pre-wrap';  // Allows text to wrap to the next line on mobile
+      element.style.fontSize = '16px';
+    } else {
+      container.style.whiteSpace = 'pre-line';  // Allows text to wrap to the next line on desktop
+      element.style.fontSize = '24px';
+      container.style.width = '600px';  // Fixed width for desktop
+    }
+
     var i = 0;
     var typingEffect = setInterval(function() {
       if (i < text.length) {
         element.textContent += text.charAt(i);
         i++;
-        
+
         // Adjust the container size here
-        container.style.width = element.scrollWidth + 'px';
         container.style.height = element.scrollHeight + 'px';
       } else {
         clearInterval(typingEffect);
-        if (!isMobile) {
+        if (!isMobile()) {
           // Only untype the text on desktop
           untypeText(element, container);
         }
@@ -180,9 +192,8 @@ function untypeText(element, container) {
     if (i > 0) {
       element.textContent = text.substring(0, i - 1);
       i--;
-      
+
       // Adjust the container size here
-      container.style.width = element.scrollWidth + 'px';
       container.style.height = element.scrollHeight + 'px';
     } else {
       clearInterval(untypingEffect);
@@ -191,11 +202,7 @@ function untypeText(element, container) {
   }, 100);
 }
 
-
-
-// Existing rest of the code
-
-
+// Run the function when the window is loaded
 window.addEventListener('load', typeText);</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is a letter without a subject, title or header.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
