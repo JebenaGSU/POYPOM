@@ -112,12 +112,30 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   overflow: hidden;
   display: inline-block;
   animation: typing 16s steps(100) infinite;
+  font-size: var(--dynamic-font-size);  /* Using dynamic font size */
 }
 
 /* Mobile-specific styles */
 @media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+    margin: 5px;
+  }
+
   .typing {
     font-size: 16px;
+  }
+}
+
+/* Using vh units for height */
+.container {
+  height: 80vh;
+}
+
+/* Landscape Mode */
+@media (orientation: landscape) {
+  body {
+    /* Adjust styles for landscape mode */
   }
 }
 
@@ -125,12 +143,25 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
   from, to { width: 0; }
   50% { width: 100%; }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">function typeText() {
+  // Dynamic Text Resizing
+  if (window.innerWidth <= 600) {
+    document.documentElement.style.setProperty('--dynamic-font-size', '16px');
+  } else {
+    document.documentElement.style.setProperty('--dynamic-font-size', '24px');
+  }
+
   var elements = document.querySelectorAll('.typing');
   
   elements.forEach(function(element) {
     var text = element.textContent;
     var container = element.parentElement;
     element.textContent = '';
+
+    // Dynamic Container Sizing for mobile
+    if (window.innerWidth <= 600) {
+      container.style.maxWidth = '90%';
+      container.style.overflow = 'auto';
+    }
     
     var i = 0;
     var typingEffect = setInterval(function() {
@@ -148,6 +179,9 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
     }, 100);
   });
 }
+
+window.addEventListener('load', typeText);
+
 
 // Existing rest of the code
 
