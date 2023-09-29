@@ -142,14 +142,10 @@ $(document).on(':passagedisplay', function(event) {
   }
 });
 
-let hasStarted = false;  // Flag to check if the game has started</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;run SimpleAudio.setup()&gt;&gt;
-&lt;&lt;for _i to 28&gt;&gt;
+let hasStarted = false;  // Flag to check if the game has started</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;for _i to 28&gt;&gt;
   &lt;&lt;cacheaudio &quot;typing&lt;&lt;_i, 2&gt;&gt;&quot; &quot;Typing-&lt;&lt;_i, 2&gt;&gt;.mp3&quot;&gt;&gt;
 &lt;&lt;/for&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Start" tags="" position="225,100" size="100,100">&lt;button id=&quot;start-button&quot;&gt;Begin the game&lt;/button&gt;</tw-passagedata><tw-passagedata pid="3" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;run playRandomTyping()&gt;&gt;&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
-&lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;This is a letter without a subject, title or header.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;run SimpleAudio.stop()&gt;&gt;
-
-&lt;&lt;timed 8s&gt;&gt;&lt;&lt;type 42ms&gt;&gt;[[Read about love and abuse.-&gt;Love and Abuse]]&lt;&lt;/type&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Act II" tags="" position="500,550" size="100,100">&lt;&lt;run playRandomTyping()&gt;&gt;&lt;&lt;type 80ms&gt;&gt;This is not a poem.
+&lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;This is a letter without a subject, title or header.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;run SimpleAudio.stop()&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Act II" tags="" position="500,550" size="100,100">&lt;&lt;run playRandomTyping()&gt;&gt;&lt;&lt;type 80ms&gt;&gt;This is not a poem.
 This is a reflection, dedicated to love.&lt;&lt;/type&gt;&gt;&lt;&lt;run SimpleAudio.stop()&gt;&gt;
 
 &lt;&lt;type 80ms&gt;&gt;My understanding of love was a miseducation&lt;&lt;/type&gt;&gt;&lt;&lt;type 40ms&gt;&gt;—that’s a hill I’ll die on.&lt;&lt;/type&gt;&gt;
