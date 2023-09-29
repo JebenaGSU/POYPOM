@@ -171,7 +171,7 @@ audio.addEventListener('error', function() {
   console.error('Audio error:', audio.error);
 });
 
-function playTypingSoundWithRandomStart() {
+function playTypingSound() {
   audio.pause();
   audio.currentTime = 0;
   audio.play().catch((error) => {
@@ -184,39 +184,14 @@ function stopTypingSound() {
   audio.currentTime = 0;
 }
 
-// Function to monitor typing completion
-function monitorTypingCompletion($element, fullText) {
-  var checkInterval = setInterval(function() {
-    if ($element.text() === fullText) {
-      clearInterval(checkInterval);
-      stopTypingSound();
-    }
-  }, 100);
-}
-
-// Observe typing
+// Listen for the start of typing
 $(document).on(':passagerender', function(event) {
-  var $passage = $(event.content);
+  playTypingSound();
+});
 
-  // Create an observer instance
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-        var $addedNode = $(mutation.addedNodes[0]);
-        var fullText = $addedNode.text();
-        
-        // Start playing sound and monitor for completion
-        playTypingSoundWithRandomStart();
-        monitorTypingCompletion($addedNode, fullText);
-      }
-    });
-  });
-
-  // Observe the passage for changes
-  observer.observe($passage[0], {
-    childList: true,
-    subtree: true
-  });
+// Listen for the end of typing
+$(document).on(':passagedisplay', function(event) {
+  stopTypingSound();
 });</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;This is a letter without a subject, title or header.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
