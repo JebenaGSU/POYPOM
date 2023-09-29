@@ -184,6 +184,16 @@ function stopTypingSound() {
   audio.currentTime = 0;
 }
 
+// Function to monitor typing completion
+function monitorTypingCompletion($element, fullText) {
+  var checkInterval = setInterval(function() {
+    if ($element.text() === fullText) {
+      clearInterval(checkInterval);
+      stopTypingSound();
+    }
+  }, 100);
+}
+
 // Observe typing
 $(document).on(':passagerender', function(event) {
   var $passage = $(event.content);
@@ -192,10 +202,12 @@ $(document).on(':passagerender', function(event) {
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+        var $addedNode = $(mutation.addedNodes[0]);
+        var fullText = $addedNode.text();
+        
+        // Start playing sound and monitor for completion
         playTypingSoundWithRandomStart();
-      }
-      if (mutation.type === "childList" && mutation.removedNodes.length > 0) {
-        stopTypingSound();
+        monitorTypingCompletion($addedNode, fullText);
       }
     });
   });
