@@ -164,7 +164,7 @@ $(document).on(':passagerender', function(event) {
 });
 
 // Your audio functions
-let audio = new Audio("Typing.mp3");  // Initialize the Audio object globally
+let audio = new Audio("Typing.mp3");
 
 // Error event listener
 audio.addEventListener('error', function() {
@@ -172,22 +172,20 @@ audio.addEventListener('error', function() {
 });
 
 function playTypingSoundWithRandomStart() {
-  console.log("Attempting to play audio."); // Debugging line
-  audio.pause();  // Pause any currently playing audio
-  audio.currentTime = 0;  // Reset the audio to the start
+  audio.pause();
+  audio.currentTime = 0;
 
   audio.addEventListener("loadedmetadata", function() {
-    audio.currentTime = Math.random() * audio.duration;  // Set to a random time
+    audio.currentTime = Math.random() * audio.duration;
     audio.play().then(() => {
-      console.log("Audio played successfully."); // Debugging line
+      console.log("Audio played successfully.");
     }).catch((error) => {
-      console.error("Audio play failed:", error); // Debugging line
+      console.error("Audio play failed:", error);
     });
   });
 }
 
 function stopTypingSound(fadeOut = false) {
-  console.log("Attempting to stop audio."); // Debugging line
   if (fadeOut) {
     let volume = 1.0;
     let fadeOutInterval = setInterval(function() {
@@ -199,17 +197,15 @@ function stopTypingSound(fadeOut = false) {
         audio.pause();
         audio.currentTime = 0;
       }
-    }, 100);  // Fades out over 1 second
+    }, 100);
   } else {
     audio.pause();
     audio.currentTime = 0;
   }
 }
 
-// Modified typewriter function
 $.fn.typewriter = function(speed) {
-  playTypingSoundWithRandomStart();  // Start typing sound
-
+  playTypingSoundWithRandomStart();
   this.each(function() {
     var $ele = $(this), str = $ele.text(), progress = 0;
     $ele.text('');
@@ -217,15 +213,14 @@ $.fn.typewriter = function(speed) {
       $ele.text(str.substring(0, progress++) + (progress & 1 ? '_' : ''));
       if (progress >= str.length + 1) {
         clearInterval(timer);
-        stopTypingSound(true);  // Stop typing sound with fade-out
+        stopTypingSound(true);
       }
     }, speed);
   });
   return this;
 };
 
-// Define the original <<type>> macro
-Macro.add('type', {
+Macro.add('customType', {
   handler() {
     const speed = parseInt(this.args[0], 10);
     const textToType = this.payload[0].contents;
@@ -235,26 +230,11 @@ Macro.add('type', {
   },
 });
 
-// Custom <<customType>> macro
-Macro.add('customType', {
-  handler() {
-    // Play the typing sound
-    playTypingSoundWithRandomStart();
-    
-    // Call the original <<type>> macro
-    this.payload[0].contents = `<<type ${this.args[0]}>>${this.payload[0].contents}<</type>>`;
-    this.engine.play(this.payload[0].contents, this.output);
-  },
-});
-
-// Add this variable to keep track of autoplay consent
 let hasAutoplayConsent = false;
 
-// Add this function to handle the consent
 function handleAutoplayConsent() {
   $("#autoplay-consent-overlay").remove();
   hasAutoplayConsent = true;
-  // Now you can play audio safely
 }
 
 // Add this to your existing document ready function or create one
@@ -270,34 +250,34 @@ $(document).on(':passagerender', function() {
     
     $("#autoplay-allow-btn").click(handleAutoplayConsent);
   }
-});</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
-&lt;&lt;timed 3s&gt;&gt;&lt;&lt;customtype 50ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is a letter without a subject, title or header.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+});</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;
+&lt;&lt;timed 3s&gt;&gt;&lt;&lt;customtype 50ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is a letter without a subject, title or header.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 8s&gt;&gt;&lt;&lt;customtype 42ms&gt;&gt;[[Read about love and abuse.-&gt;Love and Abuse]]&lt;&lt;/type&gt;&gt;
+&lt;&lt;timed 8s&gt;&gt;&lt;&lt;customtype 42ms&gt;&gt;[[Read about love and abuse.-&gt;Love and Abuse]]&lt;&lt;/customtype&gt;&gt;
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Act II" tags="" position="500,550" size="100,100">&lt;&lt;customtype 80ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;
-&lt;span class=&quot;typing fit-text&quot;&gt;This is a reflection, dedicated to love.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
+&lt;span class=&quot;typing fit-text&quot;&gt;This is a reflection, dedicated to love.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;
 
-&lt;&lt;customtype 80ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;My understanding of love was a miseducation&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;—that’s a hill I’ll die on.&lt;&lt;/type&gt;&gt;
+&lt;&lt;customtype 80ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;My understanding of love was a miseducation&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;—that’s a hill I’ll die on.&lt;&lt;/customtype&gt;&gt;
 
-&lt;&lt;timed 6s&gt;&gt;&lt;&lt;customtype 80ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;Because of you, I understand my family’s picture of love was taken with a faulty Nikon.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 6s&gt;&gt;&lt;&lt;customtype 80ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;Because of you, I understand my family’s picture of love was taken with a faulty Nikon.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 8s&gt;&gt;&lt;&lt;customtype 60ms&gt;&gt;[[Read about a miseducation of love-&gt;Miseducation of Love]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 8s&gt;&gt;&lt;&lt;customtype 60ms&gt;&gt;[[Read about a miseducation of love-&gt;Miseducation of Love]]&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 20s&gt;&gt;&lt;&lt;customtype 60ms&gt;&gt;[[Skip to the next act-&gt;Act III]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="Act III" tags="" position="500,800" size="100,100">&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
-&lt;&lt;timed 5s&gt;&gt;&lt;&lt;customtype 60ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is parts of me, and parts of you.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 20s&gt;&gt;&lt;&lt;customtype 60ms&gt;&gt;[[Skip to the next act-&gt;Act III]]&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="Act III" tags="" position="500,800" size="100,100">&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;
+&lt;&lt;timed 5s&gt;&gt;&lt;&lt;customtype 60ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is parts of me, and parts of you.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;customtype 40ms&gt;&gt;The parts of you ring like bells of love, to which you create shelter through plates full of ingredients like care, affection, recognition, respect, commitment and trust..&lt;&lt;/type&gt;&gt;
+&lt;&lt;customtype 40ms&gt;&gt;The parts of you ring like bells of love, to which you create shelter through plates full of ingredients like care, affection, recognition, respect, commitment and trust..&lt;&lt;/customtype&gt;&gt;
 
-&lt;&lt;timed 14s&gt;&gt;&lt;&lt;customtype 60ms&gt;&gt;[[Explore the ingredients of love-&gt;Ingredients of Love]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Bell Hooks Excerpt" tags="" position="250,675" size="100,100">&lt;&lt;customtype 100ms&gt;&gt;Bell Hooks: Love and abuse cannot coexist. By definition the two are antithetical to nurturance and care. This was something my chosen-mother, Crystal instilled into me early on in the dynamic of our relationship. 
+&lt;&lt;timed 14s&gt;&gt;&lt;&lt;customtype 60ms&gt;&gt;[[Explore the ingredients of love-&gt;Ingredients of Love]]&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Bell Hooks Excerpt" tags="" position="250,675" size="100,100">&lt;&lt;customtype 100ms&gt;&gt;Bell Hooks: Love and abuse cannot coexist. By definition the two are antithetical to nurturance and care. This was something my chosen-mother, Crystal instilled into me early on in the dynamic of our relationship. 
 
 Many of us—myself included, come from dysfunctional environments. Within these situations we are taught to believe that emotional, verbal, and/or physical abuse/neglect are part of love and the process of being loved. Bell Hooks says (Paraphrased): 
 
-For most people, it is too hurtful and too threatening to our sense of safety to embrace a definition of love that would no longer enable us to be &#39;loved&#39; within our family, friendships and relationships. We find the need to cling to a twisted-version of love that makes abuse acceptable or at least makes us downplay it [abuse] to a point where it was &#39;not that bad&#39;.&lt;&lt;/type&gt;&gt;
+For most people, it is too hurtful and too threatening to our sense of safety to embrace a definition of love that would no longer enable us to be &#39;loved&#39; within our family, friendships and relationships. We find the need to cling to a twisted-version of love that makes abuse acceptable or at least makes us downplay it [abuse] to a point where it was &#39;not that bad&#39;.&lt;&lt;/customtype&gt;&gt;
 
 [[Return to Love and Abuse-&gt;Love and Abuse]]</tw-passagedata><tw-passagedata pid="5" name="Bell Hooks Excerpt 2" tags="" position="375,1050" size="100,100">&lt;&lt;customtype 100ms&gt;&gt;Bell Hooks:
 
 “Affection is only one ingredient of love. To truly love we must learn to mix various ingredients—care, affection, recognition, respect, commitment, and trust, as well as honest and open communication. ”
-&lt;&lt;/type&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="End" tags="" position="562.5,1050" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="Epilogue" tags="" position="562.5,925" size="100,100">&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;
+&lt;&lt;/customtype&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="End" tags="" position="562.5,1050" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="Epilogue" tags="" position="562.5,925" size="100,100">&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;
 &lt;span class=&quot;typing fit-text&quot;&gt;This is parts of you, and parts of me.&lt;/span&gt;
 
 &lt;span class=&quot;typing fit-text&quot;&gt;At twenty-something you said I would always be something.&lt;/span&gt;
@@ -310,17 +290,17 @@ For most people, it is too hurtful and too threatening to our sense of safety to
 
 
 [[End the experience-&gt;End]]
-[[Return to the Introduction and read again-&gt;Introduction]]</tw-passagedata><tw-passagedata pid="8" name="Ingredients of Love" tags="" position="375,925" size="100,100">&lt;&lt;customtype 60ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;From nature to nurture I followed formulas of my traumas like a baby on Gerber.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
+[[Return to the Introduction and read again-&gt;Introduction]]</tw-passagedata><tw-passagedata pid="8" name="Ingredients of Love" tags="" position="375,925" size="100,100">&lt;&lt;customtype 60ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;From nature to nurture I followed formulas of my traumas like a baby on Gerber.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;
 &lt;&lt;timed 5s&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;I stumbled into trouble and had to learn to be humble. &lt;/span&gt;&lt;&lt;/timed&gt;&gt;
-&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;I had to learn to speak up, take up space and learn not to mumble.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
+&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;I had to learn to speak up, take up space and learn not to mumble.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;
 &lt;&lt;timed 15s&gt;&gt;&lt;span class=&quot;fit-text&quot;&gt;You taught me to be assertive without being crass and you gave me the [[recipe-&gt;Bell Hooks Excerpt 2]] to make love last.&lt;/span&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 15s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;[[Proceed to the epilogue-&gt;Epilogue]]&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="Introduction" tags="" position="625,300" size="100,100">&lt;&lt;customtype 35ms&gt;&gt;The prompt for this poem was to write an open letter to anyone who has made an impact on your life, directly or indirectly. &lt;&lt;/type&gt;&gt;
-&lt;&lt;customtype 42ms&gt;&gt;On 08/19/2023, we reconnected with those collections that make us, us and reminisce on who we’ve become thanks to them.&lt;&lt;/type&gt;&gt;
+&lt;&lt;timed 15s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;[[Proceed to the epilogue-&gt;Epilogue]]&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="Introduction" tags="" position="625,300" size="100,100">&lt;&lt;customtype 35ms&gt;&gt;The prompt for this poem was to write an open letter to anyone who has made an impact on your life, directly or indirectly. &lt;&lt;/customtype&gt;&gt;
+&lt;&lt;customtype 42ms&gt;&gt;On 08/19/2023, we reconnected with those collections that make us, us and reminisce on who we’ve become thanks to them.&lt;&lt;/customtype&gt;&gt;
 
-&lt;&lt;customtype 20ms&gt;&gt;[[Continue with the poem.-&gt;Act I]]&lt;&lt;/type&gt;&gt;
+&lt;&lt;customtype 20ms&gt;&gt;[[Continue with the poem.-&gt;Act I]]&lt;&lt;/customtype&gt;&gt;
 &lt;&lt;customtype 20ms&gt;&gt;[[Learn more about this interactive experience.-&gt;Learn More]]
-&lt;&lt;/type&gt;&gt;
+&lt;&lt;/customtype&gt;&gt;
 
 Debug Menu
 
@@ -332,7 +312,7 @@ Debug Menu
 [[Bell Hooks Excerpt]] 
 [[New Life]] 
 [[Miseducation of Love]]</tw-passagedata><tw-passagedata pid="10" name="Learn More" tags="" position="625,425" size="100,100">&lt;div class=&quot;passage-title&quot;&gt;Learn More&lt;/div&gt;
-&lt;&lt;customtype 20ms&gt;&gt;This is an interactive-poem written by Aireus Robinson.&lt;&lt;/type&gt;&gt;
+&lt;&lt;customtype 20ms&gt;&gt;This is an interactive-poem written by Aireus Robinson.&lt;&lt;/customtype&gt;&gt;
 
 &lt;&lt;customtype 20ms&gt;&gt;This poem is separated into four acts and includes an epilogue. Each act focuses upon various aspects of life and love, each offering their own perspectives and levels of self-reflection. It&#39;s recommended to view the acts in the order in which they were written, but ultimately you may choose to explore them in any order you wish.
 
@@ -342,21 +322,21 @@ Poem by &lt;a href=&quot;https://www.instagram.com/BayAireus/&quot; target=&quot
 
 
 [[Return to the Introduction-&gt;Introduction]]
-[[Continue with the poem-&gt;Act I]]&lt;&lt;/type&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Love and Abuse" tags="" position="375,550" size="100,100">&lt;&lt;customtype 10ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;The tools you’ve given me are to and fro—and the things you’ve taken, I may never know..&lt;/span&gt;&lt;&lt;/type&gt;&gt;
+[[Continue with the poem-&gt;Act I]]&lt;&lt;/customtype&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Love and Abuse" tags="" position="375,550" size="100,100">&lt;&lt;customtype 10ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;The tools you’ve given me are to and fro—and the things you’ve taken, I may never know..&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;
 
-&lt;&lt;timed 10s&gt;&gt;&lt;&lt;customtype 15ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;You took away my love &amp; replaced it with something new..&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 10s&gt;&gt;&lt;&lt;customtype 15ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;You took away my love &amp; replaced it with something new..&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 18s&gt;&gt;&lt;&lt;customtype 50ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;You showed me that what I once thought was love was, was actually [[abuse-&gt;Bell Hooks Excerpt]].&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 18s&gt;&gt;&lt;&lt;customtype 50ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;You showed me that what I once thought was love was, was actually [[abuse-&gt;Bell Hooks Excerpt]].&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 
 &lt;&lt;timed 25s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;
 [[Propogated Lessons.-&gt;New Life]]
-&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Miseducation of Love" tags="" position="625,675" size="100,100">&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;fit-text&quot;&gt;Picture that—a child in a war zone of shattered plates and bottles of booze;&lt;/span&gt;&lt;&lt;/type&gt;&gt;
-&lt;&lt;timed 4s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;fit-text&quot;&gt;Unable to shelter in place because the home was not safe.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Miseducation of Love" tags="" position="625,675" size="100,100">&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;fit-text&quot;&gt;Picture that—a child in a war zone of shattered plates and bottles of booze;&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;
+&lt;&lt;timed 4s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;fit-text&quot;&gt;Unable to shelter in place because the home was not safe.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 10s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;I was a soldier of love.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 10s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;I was a soldier of love.&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 28s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;[[Continue to Act III-&gt;Act III]]&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="New Life" tags="" position="437.5,675" size="100,100">&lt;span class=&quot;typing fit-text&quot;&gt;You took away that pain and propagated it into new life.&lt;/span&gt;
+&lt;&lt;timed 28s&gt;&gt;&lt;&lt;customtype 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;[[Continue to Act III-&gt;Act III]]&lt;/span&gt;&lt;&lt;/customtype&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="New Life" tags="" position="437.5,675" size="100,100">&lt;span class=&quot;typing fit-text&quot;&gt;You took away that pain and propagated it into new life.&lt;/span&gt;
 &lt;span class=&quot;typing fit-text&quot;&gt;Now I photosynthesize my trauma with my own light.&lt;/span&gt;
 
 &lt;&lt;timed 10s&gt;&gt;[[Proceed to Act II-&gt;Act II]]&lt;&lt;/timed&gt;&gt;</tw-passagedata></tw-storydata>
