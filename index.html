@@ -154,7 +154,7 @@ body {
   padding: 20px;
   border-radius: 8px;
   text-align: center;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Fade in effect for passages
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Your existing StoryScript section
 $(document).on(':passagerender', function(event) {
   var $passage = $(event.content);
   $passage.css('opacity', 0);
@@ -166,56 +166,45 @@ $(document).on(':passagerender', function(event) {
 // Initialize audio
 let audio = new Audio("Typing.mp3");
 
-// Audio error handling
+// Error event listener
 audio.addEventListener('error', function() {
   console.error('Audio error:', audio.error);
 });
 
-// Play typing sound
-function playTypingSound() {
+function playTypingSoundWithRandomStart() {
+  audio.pause();
   audio.currentTime = 0;
   audio.play().catch((error) => {
     console.error("Audio play failed:", error);
   });
 }
 
-// Stop typing sound
 function stopTypingSound() {
   audio.pause();
   audio.currentTime = 0;
 }
 
-// Event for start of typing
-$(document).on(':typestart', function() {
-  playTypingSound();
-});
+// Observe typing
+$(document).on(':passagerender', function(event) {
+  var $passage = $(event.content);
 
-// Event for end of typing
-$(document).on(':typeend', function() {
-  stopTypingSound();
-});
+  // Create an observer instance
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+        playTypingSoundWithRandomStart();
+      }
+      if (mutation.type === "childList" && mutation.removedNodes.length > 0) {
+        stopTypingSound();
+      }
+    });
+  });
 
-// Autoplay consent
-let hasAutoplayConsent = false;
-
-function handleAutoplayConsent() {
-  $("#autoplay-consent-overlay").remove();
-  hasAutoplayConsent = true;
-}
-
-// Consent overlay
-$(document).on(':passagerender', function() {
-  if (!hasAutoplayConsent) {
-    $(document.body).append(`<div id="autoplay-consent-overlay">
-      <div id="autoplay-consent-box">
-        <h1>Autoplay Permission</h1>
-        <p>We need your permission to autoplay audio. Please click "Allow" to continue.</p>
-        <button id="autoplay-allow-btn">Allow</button>
-      </div>
-    </div>`);
-
-    $("#autoplay-allow-btn").click(handleAutoplayConsent);
-  }
+  // Observe the passage for changes
+  observer.observe($passage[0], {
+    childList: true,
+    subtree: true
+  });
 });</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;This is a letter without a subject, title or header.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
