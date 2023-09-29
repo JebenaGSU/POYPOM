@@ -146,27 +146,28 @@ audio.addEventListener('error', function() {
   console.error('Audio error:', audio.error);
 });
 
+
+
 // Function to play sound
-function playTypingSound() {
-  if (hasStarted) {  // Only play if the game has started
+window.playTypingSound = function() {
+  if (hasStarted) {
     audio.play().catch((error) => {
       console.error("Audio play failed:", error);
     });
   }
 }
 
-// Function to stop sound
-function stopTypingSound() {
+window.stopTypingSound = function() {
   audio.pause();
   audio.currentTime = 0;
 }
 
 // Listen for typing start
 $(document).on(':passagerender', function(event) {
-  if (hasStarted) {  // Only play if the game has started
-    playTypingSound();
-  }
+  $(event.content).on('typeStart', playTypingSound);
+  $(event.content).on('typeEnd', stopTypingSound);
 });
+
 
 // Listen for typing end
 $(document).on(':passagedisplay', function(event) {
