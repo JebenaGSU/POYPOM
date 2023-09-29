@@ -188,26 +188,6 @@ function stopTypingSound(fadeOut = false) {
 
 // Modified typewriter function
 $.fn.typewriter = function(speed) {
-  console.log("Typewriter function invoked."); // Debugging line
-  playTypingSoundWithRandomStart();  // Start typing sound
-
-  this.each(function() {
-    var $ele = $(this), str = $ele.text(), progress = 0;
-    $ele.text('');
-    var timer = setInterval(function() {
-      $ele.text(str.substring(0, progress++) + (progress & 1 ? '_' : ''));
-      if (progress >= str.length + 1) {
-        clearInterval(timer);
-        stopTypingSound(true);  // Stop typing sound with fade-out
-      }
-    }, speed);
-  });
-  return this;
-};
-
-
-// Modified typewriter function
-$.fn.typewriter = function(speed) {
   playTypingSoundWithRandomStart();  // Start typing sound
 
   this.each(function() {
