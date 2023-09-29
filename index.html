@@ -109,17 +109,7 @@ body {
 /* Set the text color */
 .passage {
   color: black;
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
   line-height: 1.6;  /* Line Spacing */
-}
-
-.passage-in {
-  opacity: 1;
-}
-
-.passage-out {
-  opacity: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -134,27 +124,18 @@ body {
     height: auto;
   }
   /* Additional layout adjustments, padding, and spacing here */
-}
-
-#autoplay-consent-overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#autoplay-consent-box {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Your existing StoryScript section
+
+// Start button logic
+$(document).on(':passagedisplay', function(event) {
+  if (passage() === 'Start') {
+    $('#start-button').on('click', function() {
+      hasStarted = true;  // Set the flag to true
+      Engine.play('Introduction');  // Navigate to the Introduction passage
+    });
+  }
+});
+
 
 let hasStarted = false;  // Flag to check if the game has started
 
@@ -200,7 +181,7 @@ $(document).on(':passagedisplay', function(event) {
       hasStarted = true;  // Set the flag to true
     });
   }
-});</script><tw-passagedata pid="1" name="Start" tags="" position="100,100" size="100,100">[[Begin the game-&gt;Introduction]]</tw-passagedata><tw-passagedata pid="2" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
+});</script><tw-passagedata pid="1" name="Start" tags="" position="100,100" size="100,100">&lt;button id=&quot;start-button&quot;&gt;Begin the game&lt;/button&gt;</tw-passagedata><tw-passagedata pid="2" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;This is a letter without a subject, title or header.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 8s&gt;&gt;&lt;&lt;type 42ms&gt;&gt;[[Read about love and abuse.-&gt;Love and Abuse]]&lt;&lt;/type&gt;&gt;
