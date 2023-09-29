@@ -134,6 +134,26 @@ body {
     height: auto;
   }
   /* Additional layout adjustments, padding, and spacing here */
+}
+
+#autoplay-consent-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#autoplay-consent-box {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Your existing StoryScript section
 $(document).on(':passagerender', function(event) {
   var $passage = $(event.content);
@@ -202,7 +222,32 @@ $.fn.typewriter = function(speed) {
     }, speed);
   });
   return this;
-};</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
+};
+
+// Add this variable to keep track of autoplay consent
+let hasAutoplayConsent = false;
+
+// Add this function to handle the consent
+function handleAutoplayConsent() {
+  $("#autoplay-consent-overlay").remove();
+  hasAutoplayConsent = true;
+  // Now you can play audio safely
+}
+
+// Add this to your existing document ready function or create one
+$(document).on(':passagerender', function() {
+  if (!hasAutoplayConsent) {
+    $(document.body).append(`<div id="autoplay-consent-overlay">
+      <div id="autoplay-consent-box">
+        <h1>Autoplay Permission</h1>
+        <p>We need your permission to autoplay audio. Please click "Allow" to continue.</p>
+        <button id="autoplay-allow-btn">Allow</button>
+      </div>
+    </div>`);
+    
+    $("#autoplay-allow-btn").click(handleAutoplayConsent);
+  }
+});</script><tw-passagedata pid="1" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is not a poem.&lt;/span&gt;&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;This is a letter without a subject, title or header.&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 8s&gt;&gt;&lt;&lt;type 42ms&gt;&gt;[[Read about love and abuse.-&gt;Love and Abuse]]&lt;&lt;/type&gt;&gt;
