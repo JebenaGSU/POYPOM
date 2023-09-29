@@ -146,17 +146,28 @@ $(document).on(':passagerender', function(event) {
 // Your audio functions
 let audio = new Audio("/Audio/Typing/Typing.mp3");  // Initialize the Audio object globally
 
+// Error event listener
+audio.addEventListener('error', function() {
+  console.error('Audio error:', audio.error);
+});
+
 function playTypingSoundWithRandomStart() {
+  console.log("Attempting to play audio."); // Debugging line
   audio.pause();  // Pause any currently playing audio
   audio.currentTime = 0;  // Reset the audio to the start
 
   audio.addEventListener("loadedmetadata", function() {
     audio.currentTime = Math.random() * audio.duration;  // Set to a random time
-    audio.play();  // Play the audio
+    audio.play().then(() => {
+      console.log("Audio played successfully."); // Debugging line
+    }).catch((error) => {
+      console.error("Audio play failed:", error); // Debugging line
+    });
   });
 }
 
 function stopTypingSound(fadeOut = false) {
+  console.log("Attempting to stop audio."); // Debugging line
   if (fadeOut) {
     let volume = 1.0;
     let fadeOutInterval = setInterval(function() {
@@ -174,6 +185,26 @@ function stopTypingSound(fadeOut = false) {
     audio.currentTime = 0;
   }
 }
+
+// Modified typewriter function
+$.fn.typewriter = function(speed) {
+  console.log("Typewriter function invoked."); // Debugging line
+  playTypingSoundWithRandomStart();  // Start typing sound
+
+  this.each(function() {
+    var $ele = $(this), str = $ele.text(), progress = 0;
+    $ele.text('');
+    var timer = setInterval(function() {
+      $ele.text(str.substring(0, progress++) + (progress & 1 ? '_' : ''));
+      if (progress >= str.length + 1) {
+        clearInterval(timer);
+        stopTypingSound(true);  // Stop typing sound with fade-out
+      }
+    }, speed);
+  });
+  return this;
+};
+
 
 // Modified typewriter function
 $.fn.typewriter = function(speed) {
