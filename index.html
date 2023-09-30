@@ -142,7 +142,7 @@ $(document).on(':passagedisplay', function(event) {
   }
 });
 
-let hasStarted = false;  // Flag to check if the game has started</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;for _i to 28&gt;&gt;
+let hasStarted = false;  // Flag to check if the game has started</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;for _i = 1; _i &lt;= 28; _i++&gt;&gt;
   &lt;&lt;set _trackID to &quot;typing&quot; + (_i &lt; 10 ? &quot;0&quot; + _i : _i)&gt;&gt;
   &lt;&lt;set _filename to &quot;Typing-&quot; + (_i &lt; 10 ? &quot;0&quot; + _i : _i) + &quot;.mp3&quot;&gt;&gt;
   &lt;&lt;cacheaudio _trackID _filename&gt;&gt;
