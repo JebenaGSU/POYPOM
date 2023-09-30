@@ -143,8 +143,8 @@ $(document).on(':passagedisplay', function(event) {
 });
 
 let hasStarted = false;  // Flag to check if the game has started</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;for _i to 28&gt;&gt;
-  &lt;&lt;set _trackID to &quot;typing&quot; + _i&gt;&gt;
-  &lt;&lt;set _filename to &quot;Typing&quot; + _i + &quot;.mp3&quot;&gt;&gt;
+  &lt;&lt;set _trackID to &quot;typing&quot; + (_i &lt; 10 ? &quot;0&quot; + _i : _i)&gt;&gt;
+  &lt;&lt;set _filename to &quot;Typing-&quot; + (_i &lt; 10 ? &quot;0&quot; + _i : _i) + &quot;.mp3&quot;&gt;&gt;
   &lt;&lt;cacheaudio _trackID _filename&gt;&gt;
 &lt;&lt;/for&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Start" tags="" position="225,100" size="100,100">&lt;button id=&quot;start-button&quot;&gt;Begin the game&lt;/button&gt;</tw-passagedata><tw-passagedata pid="3" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;run playRandomTyping()&gt;&gt;&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;This is a letter without a subject, title or header.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;run SimpleAudio.stop()&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Act II" tags="" position="500,550" size="100,100">&lt;&lt;run playRandomTyping()&gt;&gt;&lt;&lt;type 80ms&gt;&gt;This is not a poem.
