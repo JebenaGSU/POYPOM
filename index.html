@@ -127,8 +127,8 @@ body {
 window.playRandomTyping = function() {
   var randomIndex = Math.floor(Math.random() * 28) + 1;
   var audioID = "typing" + (randomIndex < 10 ? "0" + randomIndex : randomIndex);
-  $("audio#" + audioID).get(0).play();
   State.variables.currentTrack = audioID;
+  Engine.evalPassage(`<<audio "${audioID}" play>>`);
 }
 /* twine-user-script #2: "StoryScript" */
 // Your existing StoryScript section
