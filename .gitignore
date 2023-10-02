@@ -1,1 +1,3 @@
-.vscode,build.sh,src
+.vscode/
+build.sh
+src/
