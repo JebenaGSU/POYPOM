@@ -271,6 +271,31 @@ $(document).on(':passagedisplay', function(event) {
   }
 });
 
+// Disqus configuration
+    window.disqus_config = function () {
+        this.page.url = window.location.href;  
+        this.page.identifier = passage();  // Use the current passage name as the unique identifier
+    };
+    
+    // Reload Disqus to update comments
+    DISQUS.reset({
+        reload: true,
+        config: function () {
+            this.page.identifier = passage();
+            this.page.url = window.location.href;
+        }
+    });
+
+
+// Disqus loading script
+(function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-jebenagsu-github-io-poypom.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+
+
 let hasStarted = false;  // Flag to check if the game has started
 let currentAudio;  // To keep track of the currently playing audio
 
