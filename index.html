@@ -157,10 +157,14 @@ $(document).on(':typingstart', function (ev) {
 });
 
 $(document).on(':typingstop', function (ev) {
-   //  Stop all audio files (assuming you only have these typing audio files playing)
-    $(document).one(':passagerender', function () {
-        Wikifier.wikifyEval('<<audio "*.*" stop>>');
-    });
+    // Get all audio elements
+    var audios = document.getElementsByTagName('audio');
+    for(var i = 0; i < audios.length; i++) {
+        // Check if the src attribute contains the word 'typing'
+        if(audios[i].src.includes('typing')) {
+            audios[i].pause();  // Pause the audio
+        }
+    }
 });</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;typing1&quot; &quot;Typing1.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing2&quot; &quot;Typing2.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing3&quot; &quot;Typing3.mp3&quot;&gt;&gt;
