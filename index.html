@@ -138,11 +138,25 @@ $(document).on(':passagedisplay', function(event) {
 let hasStarted = false;  // Flag to check if the game has started
 
 $(document).on(':typingstart', function (ev) {
-    SugarCube.Sound.play('typingSound');
-});
+    // Array of your audio identifiers
+    var audioFiles = [
+        "typing1", "typing2", "typing3", "typing4", 
+        "typing5", "typing6", "typing7", "typing8", 
+        "typing9", "typing10", "typing11", "typing12", 
+        "typing13", "typing14", "typing15", "typing16", 
+        "typing17", "typing18", "typing19", "typing20",
+        "typing21", "typing22", "typing23", "typing24",
+        "typing25", "typing26", "typing27", "typing28"
+    ];
+    
+    // Select a random audio identifier
+    var randomAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
+    
+    // Play the random audio file
+    post.display(function () {
+        Wikifier.wikifyEval('<<audio "' + randomAudio + '" play loop>>');
+    });
 
-$(document).on(':typingstop', function (ev) {
-    SugarCube.Sound.stop('typingSound');
 });</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;typing1&quot; &quot;Typing1.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing2&quot; &quot;Typing2.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing3&quot; &quot;Typing3.mp3&quot;&gt;&gt;
@@ -170,16 +184,16 @@ $(document).on(':typingstop', function (ev) {
 &lt;&lt;cacheaudio &quot;typing25&quot; &quot;Typing25.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing26&quot; &quot;Typing26.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing27&quot; &quot;Typing27.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;typing28&quot; &quot;Typing28.mp3&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Start" tags="" position="225,100" size="100,100">&lt;button id=&quot;start-button&quot;&gt;Begin the game&lt;/button&gt;</tw-passagedata><tw-passagedata pid="3" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;audio &quot;typing2&quot; play&gt;&gt;&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;&lt;&lt;audio &quot;typing2&quot; stop&gt;&gt;
-&lt;&lt;audio &quot;typing3&quot; play&gt;&gt;&lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;This is a letter without a subject, title or header.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;audio &quot;typing3&quot; stop&gt;&gt;
+&lt;&lt;cacheaudio &quot;typing28&quot; &quot;Typing28.mp3&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Start" tags="" position="225,100" size="100,100">&lt;button id=&quot;start-button&quot;&gt;Begin the game&lt;/button&gt;</tw-passagedata><tw-passagedata pid="3" name="Act I" tags="" position="500,425" size="100,100">&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
+&lt;&lt;timed 3s&gt;&gt;&lt;&lt;type 50ms&gt;&gt;This is a letter without a subject, title or header.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 8s&gt;&gt;&lt;&lt;type 42ms&gt;&gt;[[Read about love and abuse.-&gt;Love and Abuse]]&lt;&lt;/type&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Act II" tags="" position="500,550" size="100,100">&lt;&lt;audio &quot;typing5&quot; play&gt;&gt;&lt;&lt;type 80ms&gt;&gt;This is not a poem.
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Act II" tags="" position="500,550" size="100,100">&lt;&lt;type 80ms&gt;&gt;This is not a poem.
 This is a reflection, dedicated to love.&lt;&lt;/type&gt;&gt;
 
 &lt;&lt;type 80ms&gt;&gt;My understanding of love was a miseducation&lt;&lt;/type&gt;&gt;&lt;&lt;type 40ms&gt;&gt;—that’s a hill I’ll die on.&lt;&lt;/type&gt;&gt;
 
-&lt;&lt;audio &quot;typing1&quot; play&gt;&gt;&lt;&lt;timed 6s&gt;&gt;&lt;&lt;type 80ms&gt;&gt;Because of you, I understand my family’s picture of love was taken with a faulty Nikon.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;audio &quot;typing1&quot; stop&gt;&gt;
+&lt;&lt;timed 6s&gt;&gt;&lt;&lt;type 80ms&gt;&gt;Because of you, I understand my family’s picture of love was taken with a faulty Nikon.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 8s&gt;&gt;&lt;&lt;type 60ms&gt;&gt;[[Read about a miseducation of love-&gt;Miseducation of Love]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
