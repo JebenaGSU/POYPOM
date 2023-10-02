@@ -137,6 +137,10 @@ $(document).on(':passagedisplay', function(event) {
 
 let hasStarted = false;  // Flag to check if the game has started
 
+I apologize for the oversight. It appears the previous revisions did not resolve the issue. We should revert to using jQuery directly without the :passagerender event. You can replace the existing script with the following:
+
+javascript
+
 $(document).on(':typingstart', function (ev) {
     // Array of your audio identifiers
     var audioFiles = [
@@ -153,9 +157,7 @@ $(document).on(':typingstart', function (ev) {
     var randomAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
     
     // Play the random audio file
-    $(document).one(':passagerender', function () {
-        Wikifier.wikifyEval('<<audio "' + randomAudio + '" play loop>>');
-    });
+    Wikifier.wikifyEval('<<audio "' + randomAudio + '" play loop>>');
 });
 
 //$(document).on(':typingstop', function (ev) {
