@@ -165,7 +165,7 @@ $(document).on(':typingstart', function (ev) {
 
 $(document).on(':typingstop', function (ev) {
     // Stop all audios in the typing group
-    Wikifier.wikifyEval('<<audio "typingGroup" stop>>');
+    Wikifier.wikifyEval('<<audio ":typingGroup" stop>>');
 });</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;typing1&quot; &quot;Typing1.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing2&quot; &quot;Typing2.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing3&quot; &quot;Typing3.mp3&quot;&gt;&gt;
@@ -197,7 +197,8 @@ $(document).on(':typingstop', function (ev) {
 &lt;&lt;cacheaudio &quot;poypomloop&quot; &quot;POYPOMLOOP.mp3&quot;&gt;&gt;
 
 
-&lt;&lt;createaudiogroup &quot;typingGroup&quot;&gt;&gt;
+&lt;&lt;createaudiogroup &quot;:typingGroup&quot;&gt;&gt;
+
   &lt;&lt;track &quot;typing1&quot; &quot;Typing1.mp3&quot;&gt;&gt;
   &lt;&lt;track &quot;typing2&quot; &quot;Typing2.mp3&quot;&gt;&gt;
   &lt;&lt;track &quot;typing3&quot; &quot;Typing3.mp3&quot;&gt;&gt;
