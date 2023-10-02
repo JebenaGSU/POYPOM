@@ -100,7 +100,6 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 	</div>
 	<!-- UUID://3325D511-F487-4091-964C-2FB5E7F3BC49// --><tw-storydata name="Parts of You, Parts of Me" startnode="2" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="3325D511-F487-4091-964C-2FB5E7F3BC49" zoom="0.6" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* Set the background color */
 body {
-  background-color: #f8f8f8;
   font-family: 'Georgia', serif;  /* Typography */
   background-color: #f8f8f8;
   background-image: url('background.jpg');
@@ -271,29 +270,29 @@ $(document).on(':passagedisplay', function(event) {
   }
 });
 
-// Disqus configuration
-    window.disqus_config = function () {
+// Trigger Disqus reload on passage display
+$(document).on(':passagedisplay', function(event) {
+    var disqus_config = function () {
         this.page.url = window.location.href;  
         this.page.identifier = passage();  // Use the current passage name as the unique identifier
     };
     
-    // Reload Disqus to update comments
-    DISQUS.reset({
-        reload: true,
-        config: function () {
-            this.page.identifier = passage();
-            this.page.url = window.location.href;
-        }
-    });
+    if (window.DISQUS) {
+        DISQUS.reset({
+            reload: true,
+            config: function () {
+                this.page.identifier = passage();
+                this.page.url = window.location.href;
+            }
+        });
+    } else {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-jebenagsu-github-io-poypom.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    }
+});
 
-
-// Disqus loading script
-(function() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://https-jebenagsu-github-io-poypom.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
 
 
 let hasStarted = false;  // Flag to check if the game has started
