@@ -135,7 +135,7 @@ $(document).on(':passagedisplay', function(event) {
       hasStarted = true;  // Set the flag to true
       Engine.play('Introduction');  // Navigate to the Introduction passage
       // Start playing PoypomLoop at 69% volume and loop
-      Wikifier.wikifyEval('<<audio "poypomloop" volume 0.69 play loop>>');
+      Wikifier.wikifyEval('<<audio "poypomloop" volume 0.42 play loop>>');
     });
   }
 });
@@ -160,7 +160,7 @@ $(document).on(':typingstart', function (ev) {
     currentAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
     
     // Play the random audio file at 42% volume and loop
-    Wikifier.wikifyEval('<<audio "' + currentAudio + '" volume 0.42 play loop>>');
+    Wikifier.wikifyEval('<<audio "' + currentAudio + '" volume 0.2 play loop>>');
 });
 
 $(document).on(':typingstop', function (ev) {
@@ -237,7 +237,7 @@ $(document).on(':typingstop', function (ev) {
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="Act II" tags="" position="500,550" size="100,100">&lt;&lt;type 80ms&gt;&gt;This is not a poem.
 This is a reflection, dedicated to love.&lt;&lt;/type&gt;&gt;
 
-&lt;&lt;type 50ms&gt;&gt;My understanding of love was a miseducation&lt;&lt;/type&gt;&gt;&lt;&lt;audio &quot;molove&quot; play&gt;&gt;&lt;&lt;timed 10s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;—that’s a hill I’ll die on.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;type 50ms&gt;&gt;My understanding of love was a miseducation&lt;&lt;/type&gt;&gt;&lt;&lt;audio &quot;molove&quot; volume 0.3 play&gt;&gt;&lt;&lt;timed 10s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;—that’s a hill I’ll die on.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 6s&gt;&gt;&lt;&lt;type 70ms&gt;&gt;Because of you, I understand my family’s picture of love was taken with a faulty Nikon.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
@@ -315,8 +315,8 @@ Poem by &lt;a href=&quot;https://www.instagram.com/BayAireus/&quot; target=&quot
 [[Propagated Lessons.-&gt;New Life]]
 &lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Miseducation of Love" tags="" position="625,675" size="100,100">&lt;&lt;type 40ms&gt;&gt;Picture that—a child in a war zone of shattered plates and bottles of booze;&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 4s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;Unable to shelter in place because the home was not safe.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
-&lt;&lt;audio &quot;lovemusic&quot; play&gt;&gt;
-&lt;&lt;timed 14s&gt;&gt;&lt;&lt;audio &quot;soldieroflove&quot; play&gt;&gt;&lt;&lt;type 40ms&gt;&gt;I was a soldier of love.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;audio &quot;lovemusic&quot; volume 0.3 play&gt;&gt;
+&lt;&lt;timed 14s&gt;&gt;&lt;&lt;audio &quot;soldieroflove&quot; volume 0.2 play&gt;&gt;&lt;&lt;type 40ms&gt;&gt;I was a soldier of love.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 16s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;[[Continue to Act III-&gt;Act III]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="New Life" tags="" position="437.5,675" size="100,100">&lt;&lt;type 60ms&gt;&gt;You took away that pain and propagated it into new life.&lt;&lt;/type&gt;&gt;
 &lt;&lt;type 40ms&gt;&gt;Now I photosynthesize my trauma with my own light.&lt;&lt;/type&gt;&gt;
