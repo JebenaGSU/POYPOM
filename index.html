@@ -100,6 +100,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 	</div>
 	<!-- UUID://3325D511-F487-4091-964C-2FB5E7F3BC49// --><tw-storydata name="Parts of You, Parts of Me" startnode="2" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="3325D511-F487-4091-964C-2FB5E7F3BC49" zoom="0.6" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* Set the background color */
 body {
+  background-color: #f8f8f8;
   font-family: 'Georgia', serif;  /* Typography */
   background-color: #f8f8f8;
   background-image: url('background.jpg');
@@ -140,135 +141,6 @@ $(document).on(':passagedisplay', function(event) {
 });
 
 
-<<<<<<< HEAD
-// Volume Slider, by Chapel; for SugarCube 2
-// version 1.2.0 (modified by HiEv)
-
-/*
-    Changelog:
-    v1.2.0:
-        - Fixed using/storing the current volume level in the settings.
-    v1.1.0:
-        - Fixed compatibility issues with SugarCube version 2.28 (still
-          compatible with older versions, too).
-        - Added settings API integration for SugarCube 2.26.
-        - Internal improvements and greater style consistency with my
-          other work.
-        - Added a pre-minified version.
-        - By default, the slider is now more granular than before
-          (101 possible positions vs 11). Change the 'current' and
-          'rangeMax' options to 10 to restore the old feel.
-*/
-
-(function () {
-    // Set initial values.
-    var options = {
-        current  : 50,  // Default volume level.
-        rangeMax : 100,
-        step     : 1,
-        setting  : true
-    };
-    Setting.load();
-    if (options.setting && settings.volume) {
-        options.current = parseInt(settings.volume);
-    }
-    var vol = {
-        last: options.current,
-        start: (options.current / options.rangeMax).toFixed(2)
-    };
-
-    // Function to update the volume level.
-    function setVolume (val) {
-        if (typeof val !== 'number') val = Number(val);
-        if (Number.isNaN(val) || val < 0) val = 0;
-        if (val > 1) val = 1;
-        options.current = Math.round(val * options.rangeMax);
-        if (options.setting) {
-            settings.volume = options.current;
-            Setting.save();
-        }
-        if ($('input[name=volume]').val() != options.current) {
-            $('input[name=volume]').val(options.current);
-        }
-        try {
-            if (SimpleAudio) {
-                if (typeof SimpleAudio.volume === 'function') {
-                    SimpleAudio.volume(val);
-                } else {
-                    SimpleAudio.volume = val;
-                }
-                return val;
-            } else {
-                throw new Error('Cannot access audio API.');
-            }
-        } catch (err) {
-            // Fall back to the wikifier if we have to.
-            console.error(err.message, err);
-            $.wiki('<<masteraudio volume ' + val + '>>');
-            return val;
-        }
-    }
-
-    // Fix the initial volume level display.
-    postdisplay['volume-task'] = function (taskName) {
-        delete postdisplay[taskName];
-        setVolume(vol.start);
-    };
-
-    // Grab volume level changes from the volume slider.
-    $(document).on('input', 'input[name=volume]', function() {
-        var change = parseInt($('input[name=volume]').val());
-        setVolume(change / options.rangeMax);
-        vol.last = change;
-    });
-
-    // Create the <<volume>> macro.
-    Macro.add('volume', {
-        handler : function () {
-            var wrapper = $(document.createElement('span'));
-            var slider = $(document.createElement('input'));
-            var className = 'macro-' + this.name;
-            slider.attr({
-                id      : 'volume-control',
-                type    : 'range',
-                name    : 'volume',
-                min     : '0',
-                max     : options.rangeMax,
-                step    : options.step,
-                value   : options.current
-            });
-            // Class '.macro-volume' and ID '#volume-control' for styling the slider
-            wrapper.append(slider).addClass(className).appendTo(this.output);
-        }
-    });
-
-    // Add Setting API integration for SugarCube 2.26 and higher.
-    function updateVolume () {
-        setVolume(settings.volume / options.rangeMax);
-    }
-    if (options.setting) {
-        if (Setting && Setting.addRange && typeof Setting.addRange === 'function') {
-            Setting.addRange('volume', {
-                label : 'Volume: ',
-                min : 0,
-                max : options.rangeMax,
-                step : options.step,
-                default : options.current,
-                onInit : updateVolume,
-                onChange : updateVolume
-            });
-        } else {
-            console.error('This version of SugarCube does not include the `Settings.addRange()` method; please try updating to the latest version of SugarCube.');
-        }
-    }
-}());
-
-
-
-
-
-=======
->>>>>>> parent of 4d0a986 (Update index.html)
 let hasStarted = false;  // Flag to check if the game has started
 let currentAudio;  // To keep track of the currently playing audio
 
@@ -375,18 +247,16 @@ This is a reflection, dedicated to love.&lt;&lt;/type&gt;&gt;
 &lt;&lt;type 40ms&gt;&gt;The parts of you ring like bells of love, to which you create shelter through plates full of ingredients like care, affection, recognition, respect, commitment and trust..&lt;&lt;/type&gt;&gt;
 
 &lt;&lt;timed 14s&gt;&gt;&lt;&lt;type 60ms&gt;&gt;[[Explore the ingredients of love.-&gt;Ingredients of Love]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Bell Hooks Excerpt" tags="" position="250,675" size="100,100">&lt;&lt;audio &quot;antithetical&quot; play&gt;&gt;
-&lt;&lt;type 69ms&gt;&gt;Bell Hooks: Love and abuse cannot coexist. By definition the two are antithetical to nurturance and care. This was something my chosen-mother, Crystal instilled into me early on in the dynamic of our relationship. 
+&lt;&lt;type 42ms&gt;&gt;Bell Hooks: Love and abuse cannot coexist. By definition the two are antithetical to nurturance and care. This was something my chosen-mother, Crystal instilled into me early on in the dynamic of our relationship. 
 
-&lt;&lt;timed 17s&gt;&gt;&lt;&lt;type 42ms&gt;&gt;any of us—myself included, come from dysfunctional environments. Within these situations we are taught to believe that emotional, verbal, and/or physical abuse/neglect are part of love and the process of being loved. Bell Hooks says (Paraphrased):&lt;&lt;/type&gt;&gt; &lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 16s&gt;&gt;&lt;&lt;type 30ms&gt;&gt;Many of us—myself included, come from dysfunctional environments. Within these situations we are taught to believe that emotional, verbal, and/or physical abuse/neglect are part of love and the process of being loved. Bell Hooks says (Paraphrased):&lt;&lt;/type&gt;&gt; &lt;&lt;/timed&gt;&gt;
 
-For most people, it is too hurtful and too threatening to our sense of safety to embrace a definition of love that would no longer enable us to be &#39;loved&#39; within our family, friendships and relationships. We find the need to cling to a twisted-version of love that makes abuse acceptable or at least makes us downplay it [abuse] to a point where it was &#39;not that bad&#39;.&lt;&lt;/type&gt;&gt;
+&lt;&lt;timed 18s&gt;&gt;For most people, it is too hurtful and too threatening to our sense of safety to embrace a definition of love that would no longer enable us to be &#39;loved&#39; within our family, friendships and relationships. We find the need to cling to a twisted-version of love that makes abuse acceptable or at least makes us downplay it [abuse] to a point where it was &#39;not that bad&#39;.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
 [[Return to Love and Abuse.-&gt;Love and Abuse]]</tw-passagedata><tw-passagedata pid="7" name="Bell Hooks Excerpt 2" tags="" position="375,1050" size="100,100">&lt;&lt;type 100ms&gt;&gt;Bell Hooks:
 
 “Affection is only one ingredient of love. To truly love we must learn to mix various ingredients—care, affection, recognition, respect, commitment, and trust, as well as honest and open communication. ”
-&lt;&lt;/type&gt;&gt;
-
-&lt;&lt;timed 8s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;&lt;span class=&quot;typing fit-text&quot;&gt;[[Return to the Ingredients.-&gt;Ingredients of Love]]&lt;/span&gt;&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="End" tags="" position="562.5,1050" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="Epilogue" tags="" position="562.5,925" size="100,100">&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
+&lt;&lt;/type&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="End" tags="" position="562.5,1050" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="Epilogue" tags="" position="562.5,925" size="100,100">&lt;&lt;type 40ms&gt;&gt;This is not a poem.&lt;&lt;/type&gt;&gt;
 &lt;&lt;type 20ms&gt;&gt;This is parts of you, and parts of me.&lt;&lt;/type&gt;&gt;
 
 &lt;&lt;type 28ms&gt;&gt;At twenty-something you said I would always be something.&lt;&lt;/type&gt;&gt;
@@ -394,23 +264,24 @@ For most people, it is too hurtful and too threatening to our sense of safety to
 &lt;&lt;type 48ms&gt;&gt;I was stumbling through life like a toddler when I ran into you.&lt;&lt;/type&gt;&gt;
 &lt;&lt;type 58ms&gt;&gt;You taught me that if you don’t enjoy the process you won’t enjoy the craft. &lt;&lt;/type&gt;&gt;
 &lt;&lt;type 68ms&gt;&gt;You taught me how to shoot, pose and laugh.&lt;&lt;/type&gt;&gt;
-&lt;&lt;type 72ms&gt;&gt;You told me to be silly because others told me I couldn’t.&lt;&lt;/type&gt;&gt;
+&lt;&lt;type 70ms&gt;&gt;You told me to be silly because others told me I couldn’t.&lt;&lt;/type&gt;&gt;
 &lt;&lt;type 88ms&gt;&gt;You all gave me parts of you when the rest of the world wouldn’t.&lt;&lt;/type&gt;&gt;
+
+&lt;&lt;type 88ms&gt;&gt;Thank you.&lt;&lt;/type&gt;&gt;
 
 
 [[End the experience-&gt;End]]
 [[Return to the Introduction and read again-&gt;Introduction]]</tw-passagedata><tw-passagedata pid="10" name="Ingredients of Love" tags="" position="375,925" size="100,100">&lt;&lt;type 60ms&gt;&gt;From nature to nurture I followed formulas of my traumas like a baby on Gerber.&lt;&lt;/type&gt;&gt;
-&lt;&lt;timed 5s&gt;&gt;I stumbled into trouble and had to learn to be humble. &lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 5s&gt;&gt;&lt;&lt;type 60ms&gt;&gt;I stumbled into trouble and had to learn to be humble.&lt;&lt;/type&gt;&gt; &lt;&lt;/timed&gt;&gt;
 &lt;&lt;type 40ms&gt;&gt;I had to learn to speak up, take up space and learn not to mumble.&lt;&lt;/type&gt;&gt;
-&lt;&lt;timed 15s&gt;&gt;You taught me to be assertive without being crass and you gave me the [[recipe-&gt;Bell Hooks Excerpt 2]] to make love last.&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 15s&gt;&gt;&lt;&lt;type 60ms&gt;&gt;You taught me to be assertive without being crass and you gave me the [[recipe-&gt;Bell Hooks Excerpt 2]] to make love last.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 15s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;[[Proceed to the epilogue-&gt;Epilogue]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Introduction" tags="" position="625,300" size="100,100">&lt;&lt;type 35ms&gt;&gt;The prompt for this poem was to write an open letter to anyone who has made an impact on your life, directly or indirectly.&lt;&lt;/type&gt;&gt;
+&lt;&lt;timed 18s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;[[Proceed to the epilogue-&gt;Epilogue]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Introduction" tags="" position="625,300" size="100,100">&lt;&lt;type 35ms&gt;&gt;The prompt for this poem was to write an open letter to anyone who has made an impact on your life, directly or indirectly.&lt;&lt;/type&gt;&gt;
 &lt;&lt;type 42ms&gt;&gt;On 08/19/2023, we reconnected with those collections that make us, us and reminisce on who we’ve become thanks to them.&lt;&lt;/type&gt;&gt;
 
 &lt;&lt;type 20ms&gt;&gt;[[Continue with the poem.-&gt;Act I]]&lt;&lt;/type&gt;&gt;
 &lt;&lt;type 20ms&gt;&gt;[[Learn more about this interactive experience.-&gt;Learn More]]
 &lt;&lt;/type&gt;&gt;
-fd
 
 Debug Menu
 
@@ -444,9 +315,9 @@ Poem by &lt;a href=&quot;https://www.instagram.com/BayAireus/&quot; target=&quot
 &lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Miseducation of Love" tags="" position="625,675" size="100,100">&lt;&lt;type 40ms&gt;&gt;Picture that—a child in a war zone of shattered plates and bottles of booze;&lt;&lt;/type&gt;&gt;
 &lt;&lt;timed 4s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;Unable to shelter in place because the home was not safe.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 &lt;&lt;audio &quot;lovemusic&quot; play&gt;&gt;
-&lt;&lt;timed 15s&gt;&gt;&lt;&lt;audio &quot;soldieroflove&quot; play&gt;&gt;&lt;&lt;type 40ms&gt;&gt;I was a soldier of love.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 14s&gt;&gt;&lt;&lt;audio &quot;soldieroflove&quot; play&gt;&gt;&lt;&lt;type 40ms&gt;&gt;I was a soldier of love.&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 10s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;[[Continue to Act III-&gt;Act III]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="New Life" tags="" position="437.5,675" size="100,100">&lt;&lt;type 60ms&gt;&gt;You took away that pain and propagated it into new life.&lt;&lt;/type&gt;&gt;
+&lt;&lt;timed 16s&gt;&gt;&lt;&lt;type 40ms&gt;&gt;[[Continue to Act III-&gt;Act III]]&lt;&lt;/type&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="New Life" tags="" position="437.5,675" size="100,100">&lt;&lt;type 60ms&gt;&gt;You took away that pain and propagated it into new life.&lt;&lt;/type&gt;&gt;
 &lt;&lt;type 40ms&gt;&gt;Now I photosynthesize my trauma with my own light.&lt;&lt;/type&gt;&gt;
 
 &lt;&lt;timed 5s&gt;&gt;[[Proceed to Act II-&gt;Act II]]&lt;&lt;/timed&gt;&gt;</tw-passagedata></tw-storydata>
