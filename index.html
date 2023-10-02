@@ -135,7 +135,15 @@ $(document).on(':passagedisplay', function(event) {
   }
 });
 
-let hasStarted = false;  // Flag to check if the game has started</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;typing1&quot; &quot;Typing1.mp3&quot;&gt;&gt;
+let hasStarted = false;  // Flag to check if the game has started
+
+$(document).on(':typingstart', function (ev) {
+    SugarCube.Sound.play('typingSound');
+});
+
+$(document).on(':typingstop', function (ev) {
+    SugarCube.Sound.stop('typingSound');
+});</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;typing1&quot; &quot;Typing1.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing2&quot; &quot;Typing2.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing3&quot; &quot;Typing3.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing4&quot; &quot;Typing4.mp3&quot;&gt;&gt;
