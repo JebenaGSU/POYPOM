@@ -136,18 +136,7 @@ body {
 
 .passage[data-visibility="visible"] {
   opacity: 1;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Your existing StoryScript section
-// Start button logic
-$(document).on(':passagerender', function(event) {
-  if (!hasStarted) {
-    $('#start-button').on('click', function() {
-      hasStarted = true;
-      Engine.show("Introduction", null, 'fade', 500);
-      Wikifier.wikifyEval('<<audio "poypomloop" volume 0.69 play loop>>');
-    });
-  }
-});
-
+}
 
 // Volume Slider, by Chapel; for SugarCube 2
 // version 1.2.0 (modified by HiEv)
@@ -269,8 +258,18 @@ $(document).on(':passagerender', function(event) {
             console.error('This version of SugarCube does not include the `Settings.addRange()` method; please try updating to the latest version of SugarCube.');
         }
     }
-}());
-
+}());</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Your existing StoryScript section
+// Start button logic
+$(document).on(':passagedisplay', function(event) {
+  if (passage() === 'Start') {
+    $('#start-button').on('click', function() {
+      hasStarted = true;  // Set the flag to true
+      Engine.play('Introduction');  // Navigate to the Introduction passage
+      // Start playing PoypomLoop at 69% volume and loop
+      Wikifier.wikifyEval('<<audio "poypomloop" volume 0.69 play loop>>');
+    });
+  }
+});
 
 let hasStarted = false;  // Flag to check if the game has started
 let currentAudio;  // To keep track of the currently playing audio
