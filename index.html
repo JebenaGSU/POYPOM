@@ -124,7 +124,6 @@ body {
   }
   /* Additional layout adjustments, padding, and spacing here */
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Your existing StoryScript section
-
 // Start button logic
 $(document).on(':passagedisplay', function(event) {
   if (passage() === 'Start') {
@@ -136,10 +135,11 @@ $(document).on(':passagedisplay', function(event) {
 });
 
 let hasStarted = false;  // Flag to check if the game has started
+let currentAudio;  // To keep track of the currently playing audio
 
 $(document).on(':typingstart', function (ev) {
     // Array of your audio identifiers
-    var audioFiles = [
+    const audioFiles = [
         "typing1", "typing2", "typing3", "typing4", 
         "typing5", "typing6", "typing7", "typing8", 
         "typing9", "typing10", "typing11", "typing12", 
@@ -150,20 +150,17 @@ $(document).on(':typingstart', function (ev) {
     ];
     
     // Select a random audio identifier
-    var randomAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
+    currentAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
     
     // Play the random audio file
-    Wikifier.wikifyEval('<<audio "' + randomAudio + '" play loop>>');
+    Wikifier.wikifyEval('<<audio "' + currentAudio + '" play loop>>');
 });
 
 $(document).on(':typingstop', function (ev) {
-    // Get all audio elements
-    var audios = document.getElementsByTagName('audio');
-    for(var i = 0; i < audios.length; i++) {
-        // Check if the src attribute contains the word 'typing'
-        if(audios[i].src.includes('typing')) {
-            audios[i].pause();  // Pause the audio
-        }
+    // Stop the currently playing "typing" audio
+    if (currentAudio) {
+        Wikifier.wikifyEval('<<audio "' + currentAudio + '" stop>>');
+        currentAudio = null; // Reset the currently playing audio
     }
 });</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;typing1&quot; &quot;Typing1.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;typing2&quot; &quot;Typing2.mp3&quot;&gt;&gt;
