@@ -157,7 +157,7 @@ $(document).on(':typingstart', function (ev) {
 });
 
 $(document).on(':typingstop', function (ev) {
-     Stop all audio files (assuming you only have these typing audio files playing)
+   //  Stop all audio files (assuming you only have these typing audio files playing)
     $(document).one(':passagerender', function () {
         Wikifier.wikifyEval('<<audio "*.*" stop>>');
     });
