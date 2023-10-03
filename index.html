@@ -155,12 +155,18 @@ $(document).on(':typingstart', function (ev) {
         "typing21", "typing22", "typing23", "typing24",
         "typing25", "typing26", "typing27", "typing28"
     ];
-    
+
     // Select a random audio identifier
     currentAudio = audioFiles[Math.floor(Math.random() * audioFiles.length)];
-    
-    // Play the random audio file at 42% volume and loop
-    Wikifier.wikifyEval('<<audio "' + currentAudio + '" volume 0.2 play loop>>');
+
+    // Determine if the user is on a mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // Set the volume based on the device
+    const volume = isMobile ? 0.2 : 0.42;
+
+    // Play the random audio file at the determined volume and loop
+    Wikifier.wikifyEval('<<audio "' + currentAudio + '" volume ' + volume + ' play loop>>');
 });
 
 $(document).on(':typingstop', function (ev) {
